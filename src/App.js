@@ -9,6 +9,9 @@ import Customers from './components/customers/Customers'
 import CustomerNew from './components/customers/CustomerNew'
 import CustomerEdit from './components/customers/CustomerEdit'
 import ShowCustomer from './components/customers/ShowCustomer'
+import Depts from './components/departments/Depts'
+import ShowDept from './components/departments/ShowDept'
+import DeptEdit from './components/departments/DeptEdit'
 
 function App(props){
     return (
@@ -17,12 +20,17 @@ function App(props){
           <Navbar />
 
           <Route exact path={'/'} component={Home} />
-          <Route exact path={'/login'} component={Login} />
-          <Route exact path={'/register'} component={Register} />
-          <Route exact path={'/customers'} component={Customers} />
-          <Route exact path={'/customer/new'} component={CustomerNew} />
-          <Route exact path={'/customer/:id'} component={ShowCustomer} />
-          <Route exact path={'/customer/edit/:id'} component={CustomerEdit} />
+          <Route path={'/login'} component={Login} />
+          <Route path={'/register'} component={Register} />
+
+          <Route path={'/customers'} component={Customers} />
+          <Route path={'/customer/new'} component={CustomerNew} />
+          <Route path={'/customer/edit/:id'} component={CustomerEdit} />
+          <Route path={'/customer/:id'} component={ShowCustomer} />
+
+          <Route exact path={'/departments'} component={Depts} />
+          <Route exact path={'/departments/:id'} component={ShowDept} />
+          <Route path={'/departments/edit/:id'} component={DeptEdit} />
         </div>
       </BrowserRouter>
     )

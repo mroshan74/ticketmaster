@@ -134,13 +134,8 @@ export const startDeleteCustomer = (id) => {
       })
       .then((response) => {
         console.log('[PROMISE-deleteCustomer]', response.data)
-        const rResponse = response.data
-        if (rResponse.hasOwnProperty('errors')) {
-          alert('invalid details')
-        } else {
-          dispatch(deleteCustomer(id))
-        }
-      })
+        dispatch(deleteCustomer(id))
+        })
       .catch((err) => {
         console.log('[ERROR-deleteCustomer]', err)
       })

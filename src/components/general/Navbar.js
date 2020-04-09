@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 function Navbar(props) {
   const change = localStorage.getItem('token')
-  console.log('nav-token',change)
+  //console.log('nav-token',change)
   return (
     <div>
       <nav>
@@ -29,7 +29,7 @@ function Navbar(props) {
 }
 
 const mapStateToProps = (state) => {
-  console.log('MSTP-nav', state)
+  //console.log('MSTP-nav', state)
   return {
     login: state.login,
   }

@@ -15,7 +15,7 @@ class CustomerEdit extends Component {
   passData = (editData) => {
       const id = this.props.match.params.id
       const redirect = () => {
-          return this.props.history.push(`/customers/${id}`)
+          return this.props.history.push(`/customer/${id}`)
       }
       this.props.dispatch(startEditCustomer(editData,id,redirect))
   }
@@ -24,7 +24,7 @@ class CustomerEdit extends Component {
     return (
       <div>
         <h1>Edit Customer</h1>
-        <EditForm data={this.props.single} passData={this.passData} />
+        {Object.keys(this.props.single).length > 0 && <EditForm data={this.props.single} passData={this.passData} />}
       </div>
     )
   }
@@ -38,15 +38,23 @@ const mapStateToProps = (state) => {
 }
 
 class EditForm extends Component {
-  constructor(props) {
-    super(props)
+  constructor() {
+    super()
     this.state = {
-      name:'',
-      email:'',
-      mobile:'',
+      name: '',
+      email: '',
+      mobile: '',
     }
   }
-  
+  componentDidMount() {
+    const { name, email, mobile } = this.props.data
+    this.setState({
+      name,
+      email,
+      mobile
+    })
+  }
+
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value })
   }
@@ -55,15 +63,14 @@ class EditForm extends Component {
     e.preventDefault()
     const { name, email, mobile } = this.state
     const editCustomerData = {
-      name: name,
-      email: email,
-      mobile: mobile,
+      name,
+      email,
+      mobile
     }
     console.log('editCustomerData', editCustomerData)
     this.props.passData(editCustomerData)
   }
   render() {
-    console.log('render-inside',this.props)
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
