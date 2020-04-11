@@ -22,6 +22,7 @@ export class DeptAdd extends Component {
         }
         console.log('deptAdd', deptAdd)
         this.props.dispatch(startAddDept(deptAdd))
+        this.setState({name:''})
     }
     render() {
         return (

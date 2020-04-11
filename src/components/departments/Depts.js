@@ -3,14 +3,9 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import DeptAdd from './DeptAdd'
-import { startGetDepts, startDeleteDept } from '../../redux/actions/deptsAction'
+import { startDeleteDept } from '../../redux/actions/deptsAction'
 
 class Depts extends Component {
-    componentDidMount(){
-        if(this.props.depts.length === 0 ){
-            this.props.dispatch(startGetDepts())
-        }
-    }
     handleRemove = (id) =>{
         this.props.dispatch(startDeleteDept(id))
     }
@@ -33,6 +28,7 @@ class Depts extends Component {
 }
 
 const mapStateToProps = (state) => {
+    console.log('MSTP', state)
     return{
         depts: state.depts
     }

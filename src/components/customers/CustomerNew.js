@@ -20,9 +20,9 @@ class CustomerNew extends Component {
         e.preventDefault()
         const { name , email , mobile } = this.state
         const newCustomerData = {
-            name: name,
-            email: email,
-            mobile: mobile
+          name,
+          email,
+          mobile
         }
         const redirect = () => {
           return (this.props.history.push('/customers'))

@@ -25,3 +25,28 @@ export const startSetDeptById = (id) => {
             })
     }
 }
+
+//--------------------fetch single employee by id
+
+export const setEmpById = (data) => {
+    return { type: 'SET_EMP_BY_ID' , payload: data }
+}
+
+export const startSetEmpById = (id) => {
+    return (dispatch) => {
+        axios
+          .get(`http://dct-ticket-master.herokuapp.com/employees/${id}`, {
+            headers: {
+              'x-auth': getToken,
+            },
+          })
+          .then((response) => {
+            console.log('[PROMISE-getById-emp]', response.data)
+            const getEmp = response.data
+            dispatch(setEmpById(getEmp))
+          })
+          .catch((err) => {
+            console.log('[ERROR-getById-emp]', err)
+          })
+    }
+}
