@@ -2,23 +2,18 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-import { startGetCustomers, startDeleteCustomer } from '../../redux/actions/customersAction'
+import {startDeleteCustomer } from '../../redux/actions/customersAction'
 
 class Customers extends Component {
-    componentDidMount(){
-        if(this.props.customers.length === 0 ){
-            this.props.dispatch(startGetCustomers())
-        }
-    }
-
     handleRemove = (id) => {
       this.props.dispatch(startDeleteCustomer(id))
     }
 
     render() {
+        const {customers} = this.props
         return (
           <div>
-            <h1>Customers - {this.props.customers.length}</h1>
+            <h1>Customers - {customers.length}</h1>
             <table border='1'>
               <thead>
                 <tr>
@@ -31,7 +26,7 @@ class Customers extends Component {
                 </tr>
               </thead>
               <tbody>
-                {this.props.customers.map((customer, i) => {
+                {customers.map((customer, i) => {
                   return (
                     <tr key={i}>
                       <td>{i + 1}</td>
@@ -54,7 +49,7 @@ class Customers extends Component {
 const mapStateToProps = (state) => {
     console.log('MSTP-customer',state)
     return{
-      customers: state.customers.array
+      customers: state.customers
     }
 }
 export default connect(mapStateToProps)(Customers)

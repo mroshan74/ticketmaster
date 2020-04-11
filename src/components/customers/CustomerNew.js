@@ -78,7 +78,7 @@ class CustomerNew extends Component {
 const mapStateToProps = (state) =>{
   console.log('MSTP-newCustomer', state)
   return{
-    customers: state.customers.array
+    customers: state.customers
   }
 }
 

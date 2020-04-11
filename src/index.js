@@ -6,11 +6,13 @@ import App from './App'
 import configureStore from './redux/store/configuresStore'
 import { startSetEmps } from './redux/actions/EmpsAction'
 import { startGetDepts } from './redux/actions/deptsAction'
+import { startGetCustomers } from './redux/actions/customersAction'
 
 const store = configureStore()
 
 store.dispatch(startSetEmps())
 store.dispatch(startGetDepts())
+store.dispatch(startGetCustomers())
 
 store.subscribe(()=>{
     console.log(store.getState())

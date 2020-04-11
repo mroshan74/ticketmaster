@@ -1,17 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { startEditCustomer, startSingleCustomer } from '../../redux/actions/customersAction'
+import { startEditCustomer } from '../../redux/actions/customersAction'
 
 
 class CustomerEdit extends Component {
-  componentDidMount(){
-    console.log('CDM-edit',this.props)
-    if(Object.keys(this.props.single).length === 0){
-        this.props.dispatch(startSingleCustomer(`${this.props.match.params.id}`))
-    }
-  }
-
   passData = (editData) => {
       const id = this.props.match.params.id
       const redirect = () => {
@@ -24,16 +17,17 @@ class CustomerEdit extends Component {
     return (
       <div>
         <h1>Edit Customer</h1>
-        {Object.keys(this.props.single).length > 0 && <EditForm data={this.props.single} passData={this.passData} />}
+        {this.props.single && <EditForm data={this.props.single} passData={this.passData} />}
       </div>
     )
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, props) => {
   console.log('MSTP-editCustomer', state)
+  const id = props.match.params.id
   return {
-    single: state.customers.single,
+    single: state.customers.find(ele => ele._id===id)
   }
 }
 
