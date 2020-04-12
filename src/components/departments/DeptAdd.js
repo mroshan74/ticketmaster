@@ -18,7 +18,7 @@ export class DeptAdd extends Component {
         e.preventDefault()
         const { name } = this.state
         const deptAdd = {
-            name:name
+            name
         }
         console.log('deptAdd', deptAdd)
         this.props.dispatch(startAddDept(deptAdd))

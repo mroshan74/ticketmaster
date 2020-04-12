@@ -1,6 +1,8 @@
 import React from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
+import './styles.css'
+
 import Login from './components/layouts/Login'
 import Register from './components/layouts/Register'
 import Home from './components/layouts/Home'
@@ -16,6 +18,9 @@ import EmpHome from './components/employees/EmpHome'
 import EmpNew from './components/employees/EmpNew'
 import EmpShow from './components/employees/EmpShow'
 import EmpEdit from './components/employees/EmpEdit'
+import tickHome from './components/ticket/tickHome'
+import tickNew from './components/ticket/tickNew'
+import tickShow from './components/ticket/tickShow'
 
 function App(props) {
   return (
@@ -40,6 +45,11 @@ function App(props) {
           <Route path={'/employees'} component={EmpHome} />
           <Route exact path={'/employee/:id'} component={EmpShow} />
           <Route exact path={'/employee/edit/:id'} component={EmpEdit} />
+
+          <Route path={'/tickets'} component={tickHome} />
+          <Route path={'/ticket/new'} component={tickNew} />
+          <Route exact path={'/ticket/:id'} component={tickShow} />
+          
         </Switch>
       </div>
     </BrowserRouter>
