@@ -26,3 +26,15 @@ progress{
   margin: 0 auto;
   border-radius: 5px;
 }
+
+button{
+  width:120px;
+  height:30px;
+  color:white;
+  background-color: rgb(44, 44, 44);
+  border: none;
+  border-radius: 3px;
+  text-align: center;
+  margin: 4px;
+  padding: 3px;
+}

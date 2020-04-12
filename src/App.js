@@ -19,8 +19,9 @@ import EmpNew from './components/employees/EmpNew'
 import EmpShow from './components/employees/EmpShow'
 import EmpEdit from './components/employees/EmpEdit'
 import tickHome from './components/ticket/tickHome'
-import tickNew from './components/ticket/tickNew'
+import TickNew from './components/ticket/TickNew'
 import tickShow from './components/ticket/tickShow'
+import tickEdit from './components/ticket/tickEdit'
 
 function App(props) {
   return (
@@ -47,8 +48,9 @@ function App(props) {
           <Route exact path={'/employee/edit/:id'} component={EmpEdit} />
 
           <Route path={'/tickets'} component={tickHome} />
-          <Route path={'/ticket/new'} component={tickNew} />
+          <Route path={'/ticket/new'} component={TickNew} />
           <Route exact path={'/ticket/:id'} component={tickShow} />
+          <Route exact path={'/ticket/edit/:id'} component={tickEdit} />
           
         </Switch>
       </div>
