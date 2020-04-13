@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Select from 'react-select'
-import { startAddTickets } from '../../redux/actions/ticketAction'
+import {
+  startAddTickets,
+  startUpdateTickets,
+} from '../../redux/actions/ticketAction'
 
 class TickNew extends Component {
   constructor() {
@@ -13,65 +16,81 @@ class TickNew extends Component {
       employees: [],
       priority: '',
       message: '',
-      empsOption: []
+      empsOption: [],
+      selectValues:[]
     }
   }
 
   componentDidMount() {
     console.log('edit props new', this.props.edit)
     if (this.props.edit) {
-       const {
-         code,
-         customer,
-         department,
-         employees,
-         priority,
-         message,
-       } = this.props.edit
-      this.setState({
+      const {
         code,
         customer,
         department,
         employees,
         priority,
         message,
-      },()=>{
-        this.settingUpState()
-        console.log('after setState of edit****',this.state)})
+      } = this.props.edit
+      this.setState(
+        {
+          code,
+          customer,
+          department,
+          employees,
+          priority,
+          message,
+        },
+        () => {
+          setTimeout(()=>{
+            this.settingUpState()
+            console.log('after setState of edit****', this.state)
+          },300)
+        }
+      )
     }
   }
 
   settingUpState = () => {
-
-    console.log('i have entered the field',this.state)
-    const {emps} = this.props
+    console.log('setting up state', this.state)
+    const { emps } = this.props
+    //if (emps.length > 0) {
+      // filtering employees by department they belong using id
       const filterDepts = emps.filter(
         (emp) => emp.department._id === this.state.department
       )
-      const multiOption = [].concat(
-        filterDepts.map((option) => {
+      const multiOption = filterDepts.map((option) => {
           return { value: option._id, label: option.name }
         })
-        )
-        console.log('multioption',multiOption)
+  
+      const { employees } = this.props.edit
+      
+  
+      // setting the values of option from the employee id for the select
+      const setOptions = employees.map(emp => {
+        return { value: emp._id, label:(emps.find(ele => ele._id===emp._id)).name}
+      })
+  
       this.setState({
-        empsOption: multiOption
-      },()=>{console.log('empsoption',this.state)})
+        selectValues:setOptions,
+        empsOption:multiOption
+      })
+    //}
   }
 
   handleChange = (e) => {
     const { emps } = this.props
     this.setState({ [e.target.name]: e.target.value })
 
+    // filtering employees by department they belong using id
     if (e.target.name === 'department') {
+      this.setState({selectValues:[]})
       const filterDepts = emps.filter(
         (emp) => emp.department._id === e.target.value
       )
-      const multiOption = [].concat(
-        filterDepts.map((option) => {
+      const multiOption = filterDepts.map((option) => {
           return { value: option._id, label: option.name }
         })
-      )
       this.setState({
         empsOption: multiOption,
       })
@@ -83,13 +102,15 @@ class TickNew extends Component {
   }
 
   handleMultiValue = (options) => {
-    if(options){
+    if (options) {
       const employees = options.map((option) => {
         return Object.assign({}, { _id: option.value })
       })
       //console.log('multi-value',employees)
+      console.log('options',options)
       this.setState({
         employees,
+        selectValues: options
       })
     }
   }
@@ -116,7 +137,12 @@ class TickNew extends Component {
       message,
     }
     console.log('ticket-new', formData)
-    this.props.dispatch(startAddTickets(formData, redirect))
+    if (this.props.edit) {
+      const id = this.props.id
+      this.props.dispatch(startUpdateTickets(id, formData, this.props.redirect))
+    } else {
+      this.props.dispatch(startAddTickets(formData, redirect))
+    }
   }
 
   render() {
@@ -124,10 +150,10 @@ class TickNew extends Component {
     //console.log('state-emps',this.state.employees)
     //console.log('empsOption',this.state.empsOption)
     //console.log('depts',depts)
-    //console.log('radio', this.state.priority)
+    console.log('radio', this.state)
     return (
       <div>
-        <h1>Add Ticket</h1>
+        {this.props.edit ? <h1>Edit Ticket</h1> : <h1>Add Ticket</h1>}
         <form onSubmit={this.handleSubmit}>
           <label htmlFor='code'>code</label>
           <br />
@@ -181,9 +207,9 @@ class TickNew extends Component {
           <label htmlFor='employees'>Employees</label>
           <Select
             isMulti
-            defaultValue={{ ...[this.state.empsOption] }}
             id='employees'
             name='employees'
+            value={this.state.selectValues}
             options={this.state.empsOption}
             onChange={this.handleMultiValue}
           />

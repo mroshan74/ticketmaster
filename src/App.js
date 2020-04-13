@@ -20,7 +20,7 @@ import EmpShow from './components/employees/EmpShow'
 import EmpEdit from './components/employees/EmpEdit'
 import tickHome from './components/ticket/tickHome'
 import TickNew from './components/ticket/TickNew'
-import tickShow from './components/ticket/tickShow'
+import TickShow from './components/ticket/TickShow'
 import tickEdit from './components/ticket/tickEdit'
 
 function App(props) {
@@ -49,7 +49,7 @@ function App(props) {
 
           <Route path={'/tickets'} component={tickHome} />
           <Route path={'/ticket/new'} component={TickNew} />
-          <Route exact path={'/ticket/:id'} component={tickShow} />
+          <Route exact path={'/ticket/:id'} component={TickShow} />
           <Route exact path={'/ticket/edit/:id'} component={tickEdit} />
           
         </Switch>

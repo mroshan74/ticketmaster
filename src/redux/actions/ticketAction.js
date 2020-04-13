@@ -87,7 +87,7 @@ export const updateTickets = (id,data) => {
   return { type: 'UPDATE_TICKET', payload: {id,data} }
 }
 
-export const startUpdateTickets = (id,data) => {
+export const startUpdateTickets = (id,data,redirect) => {
   return (dispatch) => {
     axios
       .put(`http://dct-ticket-master.herokuapp.com/tickets/${id}`,data, {
@@ -104,6 +104,7 @@ export const startUpdateTickets = (id,data) => {
         else{
             alert('updated')
             dispatch(updateTickets(id,upData))
+            redirect()
         }
       })
       .catch((err) => {
