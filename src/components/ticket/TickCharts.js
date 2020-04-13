@@ -15,20 +15,17 @@ function TickCharts(props) {
             [
               'High',
               tickets.filter(
-                (ticket) => ticket.priority === 'high' && !ticket.isResolved
-              ).length,
+                (ticket) => ticket.priority === 'high' && !ticket.isResolved).length,
             ],
             [
               'Medium',
               tickets.filter(
-                (ticket) => ticket.priority === 'medium' && !ticket.isResolved
-              ).length,
+                (ticket) => ticket.priority === 'medium' && !ticket.isResolved).length,
             ],
             [
               'Low',
               tickets.filter(
-                (ticket) => ticket.priority === 'low' && !ticket.isResolved
-              ).length,
+                (ticket) => ticket.priority === 'low' && !ticket.isResolved).length,
             ],
           ]}
           options={{

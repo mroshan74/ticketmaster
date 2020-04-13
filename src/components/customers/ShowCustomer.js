@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
 import { connect } from 'react-redux'
+import StatusCustomer from './StatusCustomer'
 
 export class ShowCustomer extends Component {
   render() {
@@ -12,6 +13,7 @@ export class ShowCustomer extends Component {
           {this.props.customer.name} - {this.props.customer.email}
         </h2>}
         <Link to={`/customer/edit/${this.props.match.params.id}`}>Edit</Link>
+        <StatusCustomer id={this.props.match.params.id} />
       </div>
     )
   }

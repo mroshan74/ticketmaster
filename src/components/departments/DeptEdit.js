@@ -1,14 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { startSetDeptById } from '../../redux/actions/byIdsAction'
+
 import { startEditDept } from '../../redux/actions/deptsAction'
 
 export class DeptEdit extends Component {
-  componentDidMount() {
-    if (Object.keys(this.props.deptById).length === 0) {
-      this.props.dispatch(startSetDeptById(this.props.match.params.id))
-    }
-  }
+
   passData = (data) =>{
     const id= this.props.match.params.id
     const redirect = () =>{
@@ -19,15 +15,16 @@ export class DeptEdit extends Component {
   render() {
     return (
     <div>
-        {Object.keys(this.props.deptById).length > 0 && <EditDept passData={this.passData} data={this.props.deptById}/> }
+        {this.props.deptById && <EditDept passData={this.passData} data={this.props.deptById}/> }
     </div>)
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state,props) => {
   console.log('MSTP-edit-dept', state)
+  const id = props.match.params.id
   return {
-    deptById: state.byIds,
+    deptById: state.depts.find((ele) => ele._id === id),
   }
 }
 

@@ -1,6 +1,7 @@
 import React, { Component , Fragment } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import StatusEmps from './StatusEmps'
 
 //import { startSetEmpById } from '../../redux/actions/byIdsAction'
 
@@ -21,6 +22,7 @@ class EmpShow extends Component {
                 <Fragment>
                     <h2>{emp.name} - {emp.email}</h2>
                     <Link to={`/employee/edit/${id}`}>Edit</Link>
+                    <StatusEmps id={id} />
                 </Fragment>
                 }
             </div>

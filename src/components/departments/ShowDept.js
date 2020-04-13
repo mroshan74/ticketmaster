@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-
-import { startSetDeptById, setDeptById } from '../../redux/actions/byIdsAction'
+import StatusDepts from './StatusDepts'
 
 export class ShowDept extends Component {
     constructor(){
@@ -11,24 +10,17 @@ export class ShowDept extends Component {
             name:''
         }
     }
-    componentDidMount(){
-        if (Object.keys(this.props.deptById).length === 0) {
-          this.props.dispatch(startSetDeptById(this.props.match.params.id))
-        } else {
-          this.setState({ name: this.props.deptById.name })
-          this.props.dispatch(setDeptById(this.props.deptById))
-        }
-    }
     render() {
         console.log(this.props)
-        const id=this.props.match.params.id
-        const {name} = this.state
+        const id=this.props.match.params.id 
+        const {deptById} = this.props
         return (
           <div>
             <h2>
-              {name || this.props.deptById.name}
+              {deptById && this.props.deptById.name}
             </h2>
             <Link to={`/departments/edit/${id}`}>Edit</Link>
+            <StatusDepts id={id} />
           </div>
         )
     }
@@ -37,16 +29,10 @@ export class ShowDept extends Component {
 const mapStateToProps = (state,props) =>{
     const id=props.match.params.id
     console.log('MSTP-showdept',state)
-    if(state.depts.length === 0){
-        return{
-            deptById: state.byIds
-        }   
+    return {
+      deptById: state.depts.find(ele => ele._id===id)
     }
-    else{
-        return {
-            deptById: state.depts.find(ele => ele._id===id)
-        }
-    }
+    
 }
 
 export default connect(mapStateToProps)(ShowDept)
