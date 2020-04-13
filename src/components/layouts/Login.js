@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
-import { startLogin } from '../../redux/actions/loginActions'
+import { startLogin, startGetUser } from '../../redux/actions/loginActions'
 
 class Login extends Component {
   constructor() {
@@ -67,12 +67,9 @@ class Login extends Component {
 
 const mapStateToProps = (state) => {
     console.log('MSTP-login-state',state)
-    
-    if(state.login){
-        localStorage.setItem('token',state.login)  // setting the token to localStorage
-    }
+
     return{
-    login: state.login
+      login: state.login
     }
 }
 

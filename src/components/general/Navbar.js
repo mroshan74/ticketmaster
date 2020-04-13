@@ -1,10 +1,14 @@
 import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { startLogout } from '../../redux/actions/loginActions'
 
 function Navbar(props) {
   const change = localStorage.getItem('token')
   //console.log('nav-token',change)
+  const handleLogout = () => {
+      props.dispatch(startLogout())
+  }
   return (
     <div>
       <nav>
@@ -15,7 +19,7 @@ function Navbar(props) {
             <Link to='/departments'>Departments</Link>
             <Link to='/employees'>Employees</Link>
             <Link to='/tickets'>Tickets</Link>
-            <Link to='Logout'>Logout</Link>
+            <Link to='#' onClick={handleLogout}>Logout</Link>
           </Fragment>
         ) : (
           <Fragment>
