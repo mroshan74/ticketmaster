@@ -78,3 +78,24 @@ export const startLogout = () => {
       })
   }
 }
+
+// ---------------- registering a new user **************************
+
+export const startRegisterNew = (registerData,redirect) =>{
+    return () =>{
+      axios
+        .post(`http://dct-ticket-master.herokuapp.com/users/register`, registerData)
+        .then((response) => {
+          console.log('[PROMISE-register]', response.data)
+          if (response.data.hasOwnProperty('errors')) {
+            alert(`${response.data.message}`)
+          } else {
+            alert('successfully registered')
+            redirect()
+          }
+        })
+        .catch((err) => {
+          console.log('[ERROR-register]', err)
+        })
+    }
+}

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import axios from 'axios'
-import { Redirect } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { startRegisterNew } from '../../redux/actions/loginActions'
 
 class Register extends Component {
   constructor() {
@@ -16,40 +16,27 @@ class Register extends Component {
 
   handleChange = (e) => {
     this.setState({ 
-        [e.target.name]: e.target.value,
-         msg: '' 
+        [e.target.name]: e.target.value, 
     })
   }
 
   handleSubmit = (e) => {
     e.preventDefault()
+    const redirect = () => {
+      return this.props.history.push('/login')
+    }
     const { username, email, password } = this.state
     const registerData = {
-      username: username,
-      email: email,
-      password: password,
+      username,
+      email,
+      password,
     }
-    axios.post(`http://dct-ticket-master.herokuapp.com/users/register`,registerData)
-        .then((response) =>{
-            console.log('[promise]',response.data)
-            if(response.data.hasOwnProperty('errors')){
-                this.setState({msg:response.data.message})
-            }
-            else{
-                this.setState({redirect:true})
-            }
-        })
-        .catch((err) => {
-            console.log('[error]',err)
-        })
+    this.props.dispatch(startRegisterNew(registerData,redirect))
     console.log(registerData)
   }
   render() {
-    const {msg,redirect} =this.state
     return (
       <div>
-        {msg && alert(`${this.state.msg}`)}
-        {redirect && <Redirect to ='/login'/>}
         <h1>Register</h1>
         <form onSubmit={this.handleSubmit}>
           <input type='text' name='username' id='username' value={this.state.username} onChange={this.handleChange} placeholder={'username'} />
@@ -68,4 +55,4 @@ class Register extends Component {
   }
 }
 
-export default Register
+export default connect()(Register)

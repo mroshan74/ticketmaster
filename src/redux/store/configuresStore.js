@@ -4,7 +4,6 @@ import thunk from 'redux-thunk'
 import loginReducer from '../reducers/loginReducer'
 import customersReducer from '../reducers/customersReducer'
 import deptsReducer from '../reducers/deptsReducer'
-
 import empsReducer from '../reducers/empsReducer'
 import ticketsReducer from '../reducers/ticketsReducer'
 

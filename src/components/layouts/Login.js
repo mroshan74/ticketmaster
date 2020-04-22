@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
-import { startLogin, startGetUser } from '../../redux/actions/loginActions'
+import { startLogin } from '../../redux/actions/loginActions'
 
 class Login extends Component {
   constructor() {
