@@ -85,7 +85,7 @@ console.log('********************************',props)
     }
   return (
     <div>
-      {status === 'all' ? (<View/>) : (ticket && ticket.isResolved === status && <View/>)}
+      {status === 'all' ? (<View/>) : (ticket.isResolved === status && <View/>)}
     </div>
   )
 }

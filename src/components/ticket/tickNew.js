@@ -101,6 +101,7 @@ class TickNew extends Component {
     this.setState({ priority: type })
   }
 
+  // creating an selected option and changing to data format to be passed to api request
   handleMultiValue = (options) => {
     if (options) {
       const employees = options.map((option) => {

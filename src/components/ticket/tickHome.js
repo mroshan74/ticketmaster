@@ -31,7 +31,7 @@ class tickHome extends Component {
       let count = tickets.filter(
         (ticket) => ticket.department === dept._id && !ticket.isResolved
       ).length
-      return [].concat([`${dept.name}`, count])
+      return [`${dept.name}`, count]
     })
     console.log(result)
     return result
